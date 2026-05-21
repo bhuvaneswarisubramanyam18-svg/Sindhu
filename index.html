@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mixed Pops – Crunchy Outside, Creamy Inside!</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ── CSS Variables ── */
+    :root {
+      --mint:   #3ecfb2;
+      --lavender: #b497e8;
+      --choc:   #4a2011;
+      --orange: #f4830a;
+      --cream:  #fff8ee;
+      --dark:   #1a0a00;
+      --white:  #ffffff;
+      --font-head: 'Fredoka One', cursive;
+      --font-body: 'Nunito', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── Utility ── */
+    .btn {
+      display: inline-block;
+      padding: .65rem 1.8rem;
+      background: var(--orange);
+      color: var(--white);
+      font-family: var(--font-head);
+      font-size: 1rem;
+      letter-spacing: .04em;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(244,131,10,.4); }
+    .btn.outline {
+      background: transparent;
+      border: 2px solid var(--orange);
+      color: var(--orange);
+    }
+    .btn.outline:hover { background: var(--orange); color: #fff; }
+
+    .heading {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      text-align: center;
+      margin-bottom: 2.5rem;
+      color: var(--choc);
+      position: relative;
+    }
+    .heading::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--orange);
+      border-radius: 2px;
+      margin: .6rem auto 0;
+    }
+
+    section { padding: 5rem 6vw; }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--choc);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .8rem 5vw;
+      box-shadow: 0 4px 20px rgba(0,0,0,.35);
+    }
+    header img { height: 56px; filter: brightness(1.1); }
+
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.8rem;
+    }
+    header nav ul li a {
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      transition: color .2s;
+    }
+    header nav ul li a:hover { color: var(--orange); }
+
+    .header-icons { display: flex; gap: 1rem; }
+    .header-icons i {
+      color: var(--cream);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: color .2s;
+    }
+    .header-icons i:hover { color: var(--orange); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 92vh;
+      background: linear-gradient(135deg, var(--mint) 0%, #8ef5df 60%, #c9f7ec 100%);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 2rem;
+      padding: 4rem 8vw;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 420px; height: 420px;
+      background: radial-gradient(circle, rgba(244,131,10,.18), transparent 70%);
+      border-radius: 50%;
+    }
+
+    .hero-text .tag {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      font-family: var(--font-head);
+      font-size: .9rem;
+      padding: .3rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      letter-spacing: .06em;
+    }
+    .hero-text h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.1;
+      color: var(--choc);
+      margin-bottom: 1rem;
+    }
+    .hero-text h1 span { color: var(--orange); }
+    .hero-text .tagline {
+      font-size: 1.1rem;
+      color: #2a6057;
+      font-weight: 700;
+      margin-bottom: .6rem;
+      letter-spacing: .04em;
+    }
+    .hero-text p {
+      font-size: 1rem;
+      color: #3a5a56;
+      line-height: 1.7;
+      max-width: 440px;
+      margin-bottom: 2rem;
+    }
+    .hero-text .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .hero-img {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-img img {
+      width: 90%;
+      max-width: 480px;
+      filter: drop-shadow(0 20px 40px rgba(74,32,17,.25));
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-18px); }
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--choc);
+      color: var(--cream);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+      padding: 2rem 6vw;
+      gap: 1rem;
+    }
+    .stats-strip .stat h2 {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      color: var(--orange);
+    }
+    .stats-strip .stat p { font-size: .85rem; opacity: .8; }
+
+    /* ── ABOUT / WHY US ── */
+    .about {
+      background: var(--white);
+    }
+    .about .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+    .about .row .image img {
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 16px 48px rgba(74,32,17,.15);
+    }
+    .about .row .content h3 {
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      color: var(--choc);
+      margin-bottom: 1rem;
+    }
+    .about .row .content p { color: #555; line-height: 1.8; margin-bottom: 1rem; }
+
+    .about .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.5rem;
+    }
+    .about .card {
+      background: var(--cream);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border: 2px solid transparent;
+      transition: border .2s, transform .2s;
+    }
+    .about .card:hover { border-color: var(--orange); transform: translateY(-6px); }
+    .about .card i { font-size: 2.6rem; color: var(--orange); margin-bottom: .8rem; display: block; }
+    .about .card h2 {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      color: var(--choc);
+      margin-bottom: .5rem;
+    }
+    .about .card p { font-size: .9rem; color: #666; line-height: 1.6; }
+
+    /* ── FLAVOURS GRID ── */
+    .flavours { background: linear-gradient(160deg, #fff8ee 0%, #e8fff9 100%); }
+
+    .flavours-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1.4rem;
+    }
+    .flavour-card {
+      background: var(--white);
+      border-radius: 18px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(74,32,17,.08);
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .flavour-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--orange);
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .flavour-card:hover { transform: translateY(-8px) scale(1.04); box-shadow: 0 14px 32px rgba(244,131,10,.2); }
+    .flavour-card:hover::before { opacity: .06; }
+    .flavour-card .emoji { font-size: 2.6rem; margin-bottom: .6rem; display: block; }
+    .flavour-card h3 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      color: var(--choc);
+    }
+    .flavour-card .price {
+      display: inline-block;
+      margin-top: .5rem;
+      background: var(--orange);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 700;
+      padding: .2rem .7rem;
+      border-radius: 20px;
+    }
+
+    /* ── PRODUCT SHOWCASE ── */
+    .shop { background: var(--choc); }
+    .shop .heading { color: var(--cream); }
+    .shop .heading::after { background: var(--orange); }
+
+    .shop .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.8rem;
+    }
+    .product-card {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform .25s;
+    }
+    .product-card:hover { transform: translateY(-6px); }
+    .product-card .thumb {
+      background: linear-gradient(135deg, var(--mint), var(--lavender));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      font-size: 5rem;
+      min-height: 180px;
+    }
+    .product-card .info { padding: 1.4rem; }
+    .product-card .info h3 {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      color: var(--cream);
+      margin-bottom: .4rem;
+    }
+    .product-card .info p { font-size: .88rem; color: rgba(255,255,255,.6); margin-bottom: 1rem; line-height: 1.6; }
+
+    /* ── POSTER BANNER ── */
+    .poster-banner {
+      background: linear-gradient(135deg, var(--lavender) 0%, #c9b0f7 100%);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 2rem;
+      padding: 4rem 8vw;
+    }
+    .poster-banner .txt h2 {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      color: var(--choc);
+      margin-bottom: .6rem;
+    }
+    .poster-banner .txt p { color: #3a2060; line-height: 1.8; margin-bottom: 1.5rem; font-weight: 600; }
+    .poster-banner .qr-box {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,.15);
+    }
+    .poster-banner .qr-box .qr-placeholder {
+      width: 120px; height: 120px;
+      background: var(--choc);
+      border-radius: 12px;
+      margin: 0 auto 1rem;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 2.5rem;
+    }
+    .poster-banner .qr-box h3 {
+      font-family: var(--font-head);
+      color: var(--choc);
+      margin-bottom: .3rem;
+    }
+    .poster-banner .qr-box p { font-size: .85rem; color: #666; }
+
+    /* ── FEATURES ── */
+    .features { background: var(--white); }
+    .features .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .feat-box {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      min-height: 340px;
+      display: flex;
+      align-items: flex-end;
+    }
+    .feat-box.one { background: linear-gradient(135deg, #ffe4b5, #ffc04a); }
+    .feat-box.two { background: linear-gradient(135deg, #d4f7e8, var(--mint)); }
+    .feat-box.three { background: linear-gradient(135deg, var(--lavender), #e8d4ff); }
+    .feat-box .emoji-bg {
+      position: absolute;
+      inset: 0;
+      font-size: 9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: .25;
+    }
+    .feat-box .feat-info {
+      position: relative;
+      padding: 1.5rem;
+      background: rgba(255,255,255,.82);
+      width: 100%;
+      backdrop-filter: blur(6px);
+    }
+    .feat-box .feat-info h2 {
+      font-family: var(--font-head);
+      color: var(--choc);
+      font-size: 1.2rem;
+      margin-bottom: .4rem;
+    }
+    .feat-box .feat-info p { font-size: .88rem; color: #555; margin-bottom: .8rem; }
+
+    /* ── FAQ ── */
+    .faq { background: var(--cream); }
+    .faq .faq-inner {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .faq .contact-card {
+      background: var(--choc);
+      border-radius: 24px;
+      padding: 2.5rem;
+      color: var(--cream);
+      text-align: center;
+    }
+    .faq .contact-card i { font-size: 3rem; color: var(--orange); margin-bottom: 1rem; display: block; }
+    .faq .contact-card span { font-size: .85rem; opacity: .7; text-transform: uppercase; letter-spacing: .08em; }
+    .faq .contact-card h2 { font-family: var(--font-head); font-size: 1.6rem; margin: .4rem 0 1.2rem; }
+
+    .accordion .item {
+      border: 2px solid rgba(74,32,17,.1);
+      border-radius: 14px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+    .accordion .item .label {
+      padding: 1.1rem 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--white);
+      transition: background .2s;
+      color: var(--choc);
+    }
+    .accordion .item .label:hover { background: #fff3e0; }
+    .accordion .item .label::after { content: '+'; font-size: 1.4rem; color: var(--orange); transition: transform .3s; }
+    .accordion .item.open .label::after { transform: rotate(45deg); }
+    .accordion .item .body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .4s ease;
+      background: var(--white);
+    }
+    .accordion .item.open .body { max-height: 300px; }
+    .accordion .item .body p { padding: 1rem 1.4rem 1.4rem; color: #666; line-height: 1.8; font-size: .93rem; }
+
+    /* ── BLOG ── */
+    .blog { background: var(--white); }
+    .blog .posts {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+    .post-card {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(74,32,17,.08);
+      background: var(--cream);
+      transition: transform .25s;
+    }
+    .post-card:hover { transform: translateY(-6px); }
+    .post-card .post-thumb {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+    }
+    .post-card .post-thumb.t1 { background: linear-gradient(135deg, #ffe4b5, #ffb347); }
+    .post-card .post-thumb.t2 { background: linear-gradient(135deg, var(--mint), #b8f5e4); }
+    .post-card .post-thumb.t3 { background: linear-gradient(135deg, var(--lavender), #d4c4ff); }
+    .post-card .post-body { padding: 1.4rem; }
+    .post-card .post-body .date { font-size: .8rem; color: var(--orange); font-weight: 700; margin-bottom: .4rem; }
+    .post-card .post-body h3 { font-family: var(--font-head); color: var(--choc); font-size: 1.1rem; margin-bottom: .5rem; }
+    .post-card .post-body p { font-size: .88rem; color: #666; line-height: 1.7; margin-bottom: 1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: var(--cream);
+      padding: 3.5rem 6vw 1.5rem;
+    }
+    footer .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      margin-bottom: 1.5rem;
+    }
+    footer img { height: 52px; margin-bottom: 1rem; }
+    footer p { font-size: .88rem; color: rgba(255,255,255,.6); line-height: 1.8; }
+    footer h3 { font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 1rem; color: var(--orange); }
+    footer .links { display: flex; flex-direction: column; gap: .5rem; }
+    footer .links a { color: rgba(255,255,255,.65); text-decoration: none; font-size: .88rem; transition: color .2s; }
+    footer .links a:hover { color: var(--orange); }
+    footer .contact-info p { margin-bottom: .4rem; }
+    footer .social { display: flex; gap: .8rem; margin-top: 1rem; }
+    footer .social i { font-size: 1.3rem; cursor: pointer; transition: color .2s; color: rgba(255,255,255,.65); }
+    footer .social i:hover { color: var(--orange); }
+    footer .bottom { display: flex; justify-content: space-between; align-items: center; font-size: .83rem; color: rgba(255,255,255,.4); flex-wrap: wrap; gap: .5rem; }
+    footer .bottom a { color: var(--orange); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero, .about .row, .poster-banner, .faq .faq-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-text p { max-width: 100%; }
+      .hero-text .btn-group { justify-content: center; }
+      footer .footer-grid { grid-template-columns: 1fr 1fr; }
+      .features .feat-grid { grid-template-columns: 1fr; }
+      .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      header nav { display: none; }
+      footer .footer-grid { grid-template-columns: 1fr; }
+      .stats-strip { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <a href="#home"><img src="logo.png" alt="Svada Mixed Pops"></a>
+  <nav class="navbar">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#flavours">Flavours</a></li>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#blog">Blog</a></li>
+    </ul>
+  </nav>
+  <div class="header-icons">
+    <i class='bx bxl-facebook'></i>
+    <i class='bx bxl-instagram-alt'></i>
+    <i class='bx bxl-whatsapp'></i>
+    <i class='bx bxl-youtube'></i>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-text">
+    <span class="tag">🍦 Mixed Pops by Svada</span>
+    <h1>Crunchy <span>Outside</span>,<br>Creamy <span>Inside!</span></h1>
+    <p class="tagline">Sweet First, Spicy Next — That's Next Level Fun!</p>
+    <p>Temperature-perfect at −16°C, slow-churned at 20%, made with real fruit pulp and only the finest dairy. A Gelato Italiano experience like no other.</p>
+    <div class="btn-group">
+      <a href="#shop" class="btn">Order Now</a>
+      <a href="#flavours" class="btn outline">Explore Flavours</a>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="1.png" alt="Mixed Pops product">
+  </div>
+</section>
+
+<!-- ═══ STATS STRIP ═══ -->
+<div class="stats-strip">
+  <div class="stat"><h2>−16°C</h2><p>Perfect Temperature</p></div>
+  <div class="stat"><h2>20%</h2><p>Slow Churned Creaminess</p></div>
+  <div class="stat"><h2>12+</h2><p>Unique Flavours</p></div>
+  <div class="stat"><h2>100%</h2><p>Real Fruit Pulp</p></div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<section class="about" id="about">
+  <h2 class="heading">Why Mixed Pops?</h2>
+  <div class="row">
+    <div class="image">
+      <img src="poster.png" alt="Mixed Pops Poster">
+    </div>
+    <div class="content">
+      <h3>The flavor you need, the creaminess you deserve — Mixed Pops!</h3>
+      <p>Each Mixed Pop starts with fresh, only-once-used dairy and high-quality real fruit pulp frozen at precisely −16°C. Our proprietary slow-churn process locks in that signature creamy texture while keeping every pop crunchy on the outside.</p>
+      <p>From the kitchen of Svada Tastes & Flavours, we believe every bite should be an adventure. With flavours spanning tropical fruits, nuts, and indulgent confections, there's a pop for every palate.</p>
+      <a href="#flavours" class="btn">Explore All Flavours</a>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <i class='bx bxs-store'></i>
+      <h2>Café & Shop</h2>
+      <p>Walk in and scoop out your favourite — our stores are stocked with every flavour fresh daily.</p>
+      <br><a href="#" class="btn">Visit Shop</a>
+    </div>
+    <div class="card">
+      <i class='bx bxs-truck'></i>
+      <h2>Food Truck</h2>
+      <p>Catch our roaming pop truck near you — follow us on Instagram for live locations.</p>
+      <br><a href="#" class="btn">Track Truck</a>
+    </div>
+    <div class="card">
+      <i class='bx bxs-party'></i>
+      <h2>Catering</h2>
+      <p>Bring the pop experience to your event — corporate, weddings, birthdays, you name it.</p>
+      <br><a href="#" class="btn">Order Now</a>
+    </div>
+    <div class="card">
+      <i class='bx bxs-calendar-star'></i>
+      <h2>Special Events</h2>
+      <p>Host an unforgettable pop-up with Svada's full event package and custom branding.</p>
+      <br><a href="#" class="btn">Book Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FLAVOURS ═══ -->
+<section class="flavours" id="flavours">
+  <h2 class="heading">Our Flavours</h2>
+  <div class="flavours-grid">
+    <div class="flavour-card"><span class="emoji">🥭</span><h3>Mango</h3><span class="price">₹80</span></div>
+    <div class="flavour-card"><span class="emoji">🍓</span><h3>Strawberry</h3><span class="price">₹80</span></div>
+    <div class="flavour-card"><span class="emoji">🫐</span><h3>Blackberry</h3><span class="price">₹90</span></div>
+    <div class="flavour-card"><span class="emoji">🌰</span><h3>Sitaphal</h3><span class="price">₹95</span></div>
+    <div class="flavour-card"><span class="emoji">🥥</span><h3>Coconut</h3><span class="price">₹85</span></div>
+    <div class="flavour-card"><span class="emoji">🥑</span><h3>Avocado</h3><span class="price">₹100</span></div>
+    <div class="flavour-card"><span class="emoji">🍈</span><h3>Jackfruit</h3><span class="price">₹90</span></div>
+    <div class="flavour-card"><span class="emoji">🥥</span><h3>Tender Coconut</h3><span class="price">₹85</span></div>
+    <div class="flavour-card"><span class="emoji">🫘</span><h3>Pistachio</h3><span class="price">₹110</span></div>
+    <div class="flavour-card"><span class="emoji">🌰</span><h3>Almond</h3><span class="price">₹105</span></div>
+    <div class="flavour-card"><span class="emoji">🍫</span><h3>Truffle</h3><span class="price">₹120</span></div>
+    <div class="flavour-card"><span class="emoji">🍪</span><h3>Lotus Biscoff</h3><span class="price">₹130</span></div>
+  </div>
+</section>
+
+<!-- ═══ SHOP ═══ -->
+<section class="shop" id="shop">
+  <h2 class="heading">Latest Products</h2>
+  <div class="products">
+    <div class="product-card">
+      <div class="thumb">🥭</div>
+      <div class="info">
+        <h3>Mango Mixed Pop</h3>
+        <p>Alphonso mango pulp, slow-churned, crunchy outer shell. A tropical classic.</p>
+        <a href="#" class="btn">Buy Now</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="thumb">🍓</div>
+      <div class="info">
+        <h3>Strawberry Pop</h3>
+        <p>Real strawberry puree, dense and silky texture, bold berry punch.</p>
+        <a href="#" class="btn">Buy Now</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="thumb">🍪</div>
+      <div class="info">
+        <h3>Lotus Biscoff Pop</h3>
+        <p>Our premium bestseller — caramelised biscuit flavour meets creamy gelato.</p>
+        <a href="#" class="btn">Buy Now</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="thumb">🫐</div>
+      <div class="info">
+        <h3>Blackberry Fusion</h3>
+        <p>A complex blend of cultures and tastes. A true flavour odyssey.</p>
+        <a href="#" class="btn">Buy Now</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="thumb">🫘</div>
+      <div class="info">
+        <h3>Pistachio Royale</h3>
+        <p>Rich Iranian pistachio essence with a luxuriously smooth gelato centre.</p>
+        <a href="#" class="btn">Buy Now</a>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="thumb">🥥</div>
+      <div class="info">
+        <h3>Tender Coconut</h3>
+        <p>Authentic tender coconut water and flesh, frozen to perfection.</p>
+        <a href="#" class="btn">Buy Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ POSTER BANNER ═══ -->
+<div class="poster-banner">
+  <div class="txt">
+    <h2>🌶️ Sweet First, Spicy Next</h2>
+    <p>That's Next Level Fun! Scan the QR code to order your Mixed Pops directly from your phone. Available for delivery and pick-up island-wide.</p>
+    <a href="#" class="btn">Order Online</a>
+  </div>
+  <div class="qr-box">
+    <div class="qr-placeholder"><i class='bx bx-qr'></i></div>
+    <h3>Scan to Order</h3>
+    <p>www.mixedpops.com</p>
+    <p style="margin-top:.4rem;font-weight:700;color:var(--choc)">+91 012345689</p>
+  </div>
+</div>
+
+<!-- ═══ FEATURED ═══ -->
+<section class="features">
+  <h2 class="heading">Featured Products</h2>
+  <div class="feat-grid">
+    <div class="feat-box one">
+      <div class="emoji-bg">🥭</div>
+      <div class="feat-info">
+        <h2>Mango Waffle Cone Pop</h2>
+        <p>The perfect summer escape, crunch meets cream in every single bite.</p>
+        <a href="#" class="btn">Buy Now</a>
+      </div>
+    </div>
+    <div class="feat-box two">
+      <div class="emoji-bg">🍓</div>
+      <div class="feat-info">
+        <h2>Strawberry Classic Pop</h2>
+        <p>Dense, silky, and smooth — our classic strawberry never disappoints.</p>
+        <a href="#" class="btn">Buy Now</a>
+      </div>
+    </div>
+    <div class="feat-box three">
+      <div class="emoji-bg">🍪</div>
+      <div class="feat-info">
+        <h2>Lotus Biscoff Special</h2>
+        <p>Caramelised biscuit perfection — our most indulgent creation yet.</p>
+        <a href="#" class="btn">Buy Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq" id="faq">
+  <h2 class="heading">Frequently Asked Questions</h2>
+  <div class="faq-inner">
+    <div class="contact-card">
+      <i class='bx bx-headphone'></i>
+      <span>Need More Help?</span>
+      <h2>+91 012345689</h2>
+      <a href="#" class="btn">Call Us</a>
+    </div>
+    <div class="accordion">
+      <div class="item">
+        <div class="label">What makes Mixed Pops different from regular ice cream?</div>
+        <div class="body"><p>Mixed Pops are slow-churned at 20% overrun and frozen to precisely −16°C, giving them a uniquely dense, gelato-like creaminess inside a satisfying crunchy outer coating. We only use fresh dairy and real fruit pulp — never artificial flavours.</p></div>
+      </div>
+      <div class="item">
+        <div class="label">Where can I buy Mixed Pops?</div>
+        <div class="body"><p>You can order directly via our website (www.mixedpops.com), visit our café & shop, or catch our food truck. We also offer delivery through major food delivery platforms.</p></div>
+      </div>
+      <div class="item">
+        <div class="label">Do you offer catering for events?</div>
+        <div class="body"><p>Absolutely! We cater for weddings, corporate events, birthday parties, and more. Contact us at +91 012345689 to discuss your requirements and get a custom package.</p></div>
+      </div>
+      <div class="item">
+        <div class="label">Are your products suitable for vegetarians?</div>
+        <div class="body"><p>Yes! All Mixed Pops are 100% vegetarian. We use high-quality dairy and real fruit pulp with no animal-derived gelatin or rennet in any of our products.</p></div>
+      </div>
+      <div class="item">
+        <div class="label">What flavours are currently available?</div>
+        <div class="body"><p>We offer 12 flavours including Mango, Strawberry, Blackberry, Sitaphal, Coconut, Avocado, Jackfruit, Tender Coconut, Pistachio, Almond, Truffle, and our premium Lotus Biscoff. Seasonal specials are added throughout the year!</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BLOG ═══ -->
+<section class="blog" id="blog">
+  <h2 class="heading">Latest Posts</h2>
+  <div class="posts">
+    <div class="post-card">
+      <div class="post-thumb t1">🥭</div>
+      <div class="post-body">
+        <p class="date">📅 Jan 12, 2025</p>
+        <h3>The Science Behind Our Slow-Churn Process</h3>
+        <p>Discover why churning at exactly 20% overrun gives Mixed Pops that signature creamy-yet-dense gelato texture.</p>
+        <a href="#" class="btn">Read More</a>
+      </div>
+    </div>
+    <div class="post-card">
+      <div class="post-thumb t2">🍓</div>
+      <div class="post-body">
+        <p class="date">📅 Feb 3, 2025</p>
+        <h3>5 Exotic Flavours You Must Try This Summer</h3>
+        <p>From Sitaphal to Lotus Biscoff — our team picks the must-have pops for this season.</p>
+        <a href="#" class="btn">Read More</a>
+      </div>
+    </div>
+    <div class="post-card">
+      <div class="post-thumb t3">🍪</div>
+      <div class="post-body">
+        <p class="date">📅 Mar 20, 2025</p>
+        <h3>How to Host the Perfect Mixed Pops Party</h3>
+        <p>Tips and tricks for catering a pop-themed event that your guests will talk about for months.</p>
+        <a href="#" class="btn">Read More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <img src="logo.png" alt="Svada">
+      <p>Svada Tastes & Flavours — bringing you Mixed Pops crafted with passion, precision, and real ingredients. Sweet first, spicy next. That's next level fun!</p>
+      <br><a href="#" class="btn" style="margin-top:.8rem">Contact Us</a>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#flavours">Flavours</a>
+        <a href="#shop">Shop</a>
+        <a href="#faq">FAQ</a>
+        <a href="#blog">Blog</a>
+      </div>
+    </div>
+    <div>
+      <h3>Our Services</h3>
+      <div class="links">
+        <a href="#">Café & Shop</a>
+        <a href="#">Food Truck</a>
+        <a href="#">Catering</a>
+        <a href="#">Special Events</a>
+        <a href="#">Franchise</a>
+      </div>
+    </div>
+    <div class="contact-info">
+      <h3>Get in Touch</h3>
+      <p>📞 +91 012345689</p>
+      <p>📧 hello@mixedpops.com</p>
+      <p>🌐 www.mixedpops.com</p>
+      <p>📍 mixedpops &nbsp;|&nbsp; mixed_pops</p>
+      <div class="social">
+        <i class='bx bxl-facebook'></i>
+        <i class='bx bxl-instagram'></i>
+        <i class='bx bxl-whatsapp'></i>
+        <i class='bx bxl-youtube'></i>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <p>Copyright © 2025 Svada Tastes & Flavours. All Rights Reserved.</p>
+    <a href="#">Become a Franchise Partner</a>
+  </div>
+</footer>
+
+<script>
+  // Accordion
+  document.querySelectorAll('.accordion .item .label').forEach(lbl => {
+    lbl.addEventListener('click', () => {
+      const item = lbl.closest('.item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion .item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Mobile nav toggle (hamburger could be added here)
+</script>
+</body>
+</html>
